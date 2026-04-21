@@ -2,18 +2,15 @@
 \documentclass[12pt]{article}
 
 \usepackage{KUstyle}
-\usepackage[margin=0.8in]{geometry}
+\usepackage[margin=1in]{geometry}
 \usepackage{setspace}
-\usepackage{tabularx}
 \usepackage{fontspec}
 \usepackage{float}
 \usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{nicefrac}
 \usepackage[english]{babel}
-
-\usepackage[listings]{tcolorbox}
-\tcbuselibrary{listings,theorems}
-
-
 
 % Bibliography
 \usepackage[
@@ -21,7 +18,7 @@
   style=authoryear,
   natbib=true
 ]{biblatex}
-\addbibresource{Afsnit/library.bib} % <- your .bib file
+\addbibresource{Afsnit/library.bib}
 
 \usepackage[
   colorlinks=false,
@@ -36,15 +33,12 @@
 % Front page info
 \ptype{Household behaviour over the lifecycle}
 \author{Markus Emil Skifter}
-\title{Assignment 2}
-\subtitle{Life-Cycle Labor Supply of Couples}
-\date{April 2026}
+\title{Assignment 3}
+\subtitle{Paternity Leave Quotas and the Gender Wage Gap:\\ A Life-Cycle Model}
+\date{May 2026}
 \advisor{}
 
-\renewcommand{\contentsname}{Table of contents}
-
-\setcounter{secnumdepth}{0}
-
+\setcounter{secnumdepth}{1}
 
 \begin{document}
 
@@ -52,37 +46,34 @@
 
 \onehalfspacing
 
-\newpage
-\tableofcontents
-\newpage
-
 {\fontfamily{ptm}\selectfont
 
+\begin{center}
+  {\large \textbf{Paternity Leave Quotas and the Gender Wage Gap: A Life-Cycle Model}}
+\end{center}
+
+\vspace{0.5em}
+
+\begin{abstract}
+\noindent
+A persistent gender wage gap emerges in Denmark at the time of first childbirth, driven in large part by an asymmetric division of parental leave: mothers take roughly four times as much leave as fathers. This paper proposes a dynamic life-cycle model of household labor supply and human capital accumulation to evaluate how mandatory paternity leave quotas affect the long-run gender wage gap and household welfare. In the model, when a child arrives, the couple jointly decides how to split parental leave. Without a paternity quota, the household optimally assigns the majority of leave to the lower earner --- typically the mother --- which depresses her human capital accumulation and generates a persistent earnings gap. A mandatory paternity quota forces fathers to take a minimum share of leave, redistributing the career cost of children and compressing the wage gap. We discuss how the model can be taken to Danish register data to estimate key structural parameters, and outline counterfactual policy experiments for several quota designs.
+\end{abstract}
 
 \newpage
-\input{Afsnit/Baseline model}
+
+\input{Afsnit/Introduction}
 
 \newpage
-\input{Afsnit/Opgave 1}
 
-% \newpage
-\input{Afsnit/Opgave 2}
+\input{Afsnit/Model}
 
 \newpage
-\input{Afsnit/Opgave 3}
 
-% \newpage
-\input{Afsnit/Opgave 4}
-
-% \newpage
-\input{Afsnit/Opgave 5}
-
-\input{Afsnit/Opgave 6}
-
+\input{Afsnit/Analysis}
 
 \newpage
 \printbibliography
-\input{Afsnit/Appendix}
+
 } % closes {\fontfamily{ptm}\selectfont
 
 \end{document}

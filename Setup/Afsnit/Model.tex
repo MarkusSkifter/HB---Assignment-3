@@ -1,0 +1,161 @@
+\section{Model}
+
+We propose a finite-horizon, discrete-time life-cycle model of a two-earner household. The model is solved by backward induction. Agent 1 denotes the father and agent 2 the mother. We assume both agents have equal initial human capital, so any wage gap emerges endogenously through differential leave-taking.
+
+\subsection{State variables}
+
+At the beginning of period $t \in \{0, 1, \ldots, T-1\}$, the household is characterized by the state vector
+\[
+    s_t = (a_t,\; k_{1,t},\; k_{2,t},\; n_t),
+\]
+where $a_t \in \mathbb{R}$ is household financial wealth, $k_{i,t} \geq 0$ is the human capital of agent $i \in \{1,2\}$, and $n_t \in \{0, 1\}$ indicates whether the household has a child.
+
+\subsection{Preferences}
+
+The household maximizes expected lifetime utility:
+\[
+    \mathbb{E}_0 \left[ \sum_{t=0}^{T-1} \rho^t \cdot u(c_t,\, h_{1,t},\, h_{2,t},\, n_t) \right],
+\]
+where $\rho \in (0,1)$ is the discount factor. Period utility is additively separable in consumption and the labor disutility of each partner:
+\begin{equation}
+    u(c_t, h_{1,t}, h_{2,t}, n_t) = \frac{c_t^{1+\eta}}{1+\eta} - \beta(n_t)\left[\frac{h_{1,t}^{1+\gamma}}{1+\gamma} + \frac{h_{2,t}^{1+\gamma}}{1+\gamma}\right],
+    \label{eq:utility}
+\end{equation}
+where $\eta < 0$ is the CRRA coefficient for consumption, $\gamma > 0$ governs the curvature of labor disutility, and
+\[
+    \beta(n_t) = \beta_0 + \beta_1 \cdot n_t
+\]
+captures the additional disutility of market work in the presence of a child ($\beta_1 > 0$). The symmetry in labor disutility across partners implies that the household cares only about total hours worked; asymmetric outcomes arise through wages, not preferences.
+
+\subsection{Wages and human capital}
+
+The after-tax wage of agent $i$ in period $t$ is
+\begin{equation}
+    w_{i,t} = (1 - \tau)\,\bar{w}\,(1 + \alpha\, k_{i,t}),
+    \label{eq:wage}
+\end{equation}
+where $\tau$ is the labor income tax rate, $\bar{w}$ is the base wage, and $\alpha > 0$ is the return to human capital. The wage is increasing in accumulated human capital, so agents who work more in the past earn more in the future.
+
+Human capital accumulates through market work and is subject to depreciation during parental leave. Let $l_{i,t} \in [0,1]$ denote the fraction of the period that agent $i$ spends on leave. Human capital evolves as:
+\begin{equation}
+    k_{i,t+1} = k_{i,t}\,(1 - \delta_i\, l_{i,t}) + h_{i,t},
+    \label{eq:hc}
+\end{equation}
+where $\delta_i \geq 0$ is the human capital depreciation rate during leave for agent $i$. The term $h_{i,t}$ is hours of market work in period $t$; agents on leave set $h_{i,t} = 0$. The parameter $\delta_2 \geq \delta_1 \geq 0$ allows for asymmetric depreciation rates, reflecting the empirical finding that mothers' earnings drop sharply upon leave while fathers' are largely unaffected even when they take leave \citep{patnaik2019reserving}.
+
+In the baseline with no leave ($l_{i,t} = 0$ always), equation \eqref{eq:hc} reduces to $k_{i,t+1} = k_{i,t} + h_{i,t}$, which is precisely the accumulation rule in the lecture 5 model.
+
+\subsection{Fertility}
+
+A child arrives at the beginning of period $t+1$ with probability $p_b$ if the household is currently childless:
+\[
+    n_{t+1} = \min(n_t + b_{t+1},\; 1), \qquad b_{t+1} \sim \text{Bernoulli}(p_b \cdot \mathbf{1}[n_t = 0]).
+\]
+Fertility is exogenous and cannot be repeated once a child is present. This keeps the state space tractable while capturing the key one-time career disruption.
+
+\subsection{Parental leave and the policy constraint}
+
+When a child is born (i.e., $b_{t+1} = 1$), the household must allocate a total of $\bar{L}$ units of parental leave between the two partners.\footnote{We normalize $\bar{L} = 1$, representing one full period of leave to be shared.} Let $\lambda_t \in [0,1]$ denote the \textit{father's share} of total leave, so the mother's share is $1 - \lambda_t$. The leave allocations are:
+\[
+    l_{1,t} = \lambda_t \cdot \bar{L}, \qquad l_{2,t} = (1 - \lambda_t)\cdot\bar{L}.
+\]
+If no child is born, $l_{1,t} = l_{2,t} = 0$.
+
+\paragraph{Policy constraint.}
+The key policy instrument is a mandatory paternity leave quota $\bar{q} \in [0, \nicefrac{1}{2}]$. The household must satisfy:
+\begin{equation}
+    \lambda_t \geq \bar{q} \qquad \text{whenever } b_{t+1} = 1.
+    \label{eq:quota}
+\end{equation}
+When $\bar{q} = 0$, there is no constraint and the household chooses $\lambda_t$ freely. When $\bar{q} = 0.5$, parental leave must be split equally.
+
+\paragraph{Leave benefits.}
+During a leave period, each agent receives a replacement transfer:
+\begin{equation}
+    B_{i,t} = \phi\,\bar{w}\,l_{i,t},
+    \label{eq:benefit}
+\end{equation}
+where $\phi \in (0,1)$ is the replacement rate. We abstract from wage-indexed benefits for simplicity; the key feature is that both partners receive the same per-unit benefit, so any asymmetry in outcomes stems from the wage difference at the time of birth --- not from differential benefit levels.
+
+\subsection{Budget constraint}
+
+Household income in period $t$ is:
+\[
+    Y_t = \sum_{i=1}^{2}\left[w_{i,t}\,h_{i,t} + B_{i,t}\right].
+\]
+The household budget constraint is:
+\begin{equation}
+    c_t + a_{t+1} = (1 + r)\,a_t + Y_t,
+    \label{eq:budget}
+\end{equation}
+where $r$ is the interest rate and $c_t > 0$. Borrowing is allowed up to a natural borrowing limit.
+
+\subsection{Bellman equation}
+
+The household's problem can be written recursively. Define $V_t(s_t)$ as the value function at the beginning of period $t$. In periods without a birth, the household solves:
+\begin{equation}
+    V_t(a_t, k_{1,t}, k_{2,t}, n_t) = \max_{c_t,\, h_{1,t},\, h_{2,t}} \left\{ u(c_t, h_{1,t}, h_{2,t}, n_t) + \rho\,\mathbb{E}_t\!\left[V_{t+1}(a_{t+1}, k_{1,t+1}, k_{2,t+1}, n_{t+1})\right]\right\},
+    \label{eq:bellman_nob}
+\end{equation}
+subject to \eqref{eq:wage}--\eqref{eq:budget} and non-negativity constraints.
+
+In periods when a birth occurs ($b_{t+1} = 1$), the household additionally chooses the leave split $\lambda_t$ subject to \eqref{eq:quota}:
+\begin{equation}
+    V_t(a_t, k_{1,t}, k_{2,t}, n_t) = \max_{c_t,\, h_{1,t},\, h_{2,t},\, \lambda_t} \left\{ u(c_t, 0, 0, n_t) + \rho\,\mathbb{E}_t\!\left[V_{t+1}(a_{t+1}, k_{1,t+1}, k_{2,t+1}, n_{t+1})\right]\right\},
+    \label{eq:bellman_b}
+\end{equation}
+where, during a full-leave period for agent $i$, market hours are $h_{i,t} = 0$. In the partial-leave case, agents split the period between leave and market work proportionally; for simplicity, we assume the leave period is discrete and the leave-taker works zero hours during the period. This is consistent with Danish leave rules, where leave is typically taken as a contiguous block.
+
+The problem is solved by backward induction from period $T-1$, at which point the terminal value is set to zero (no bequest motive).
+
+\subsection{The gender wage gap}
+
+The model's key outcome of interest is the \textit{endogenous gender wage gap}. Since both partners start with equal human capital $k_{1,0} = k_{2,0} = k_0$, any wage difference at time $t$ is due to differential human capital accumulation:
+\begin{equation}
+    G_t \equiv \frac{w_{1,t} - w_{2,t}}{w_{1,t}} = \frac{\alpha(k_{1,t} - k_{2,t})}{1/\bar{w} + \alpha\, k_{1,t}}.
+    \label{eq:gap}
+\end{equation}
+The gap is zero at $t=0$ and grows to the extent that the father accumulates more human capital than the mother --- which happens precisely when the mother takes more leave.
+
+\subsection{Mechanisms}
+
+The model features three distinct mechanisms through which a paternity quota affects the gender wage gap:
+
+\paragraph{1. Direct career-cost redistribution.}
+A higher $\bar{q}$ forces the father to take more leave, reducing his human capital accumulation and increasing the mother's relative accumulation. This directly compresses $G_t$.
+
+\paragraph{2. Behavioral response in market hours.}
+Because wages depend on human capital, forcing the father onto leave lowers his future wage and hence his incentive to supply labor in subsequent periods. The mother's wage --- and therefore her labor supply incentive --- increases. This reinforces the direct effect: the wage gap narrows further due to the dynamic behavioral response.
+
+\paragraph{3. Income effect and consumption smoothing.}
+Mandatory paternity leave reduces total household income in the short run (if the father is the higher earner). The household smooths consumption by adjusting savings. Welfare depends on the balance between the short-run income loss and the long-run wage-convergence gains. Whether households with different initial human capital endowments gain or lose from a quota is a quantitative question that the model can answer.
+
+\paragraph{Summary table of parameters.}
+
+\begin{table}[H]
+\centering
+\caption{Model parameters}
+\label{tab:params}
+\begin{tabular}{clll}
+\toprule
+Parameter & Description & Value & Source \\
+\midrule
+$T$       & Number of periods          & 10     & \\
+$\rho$    & Discount factor            & 0.98   & Standard \\
+$\eta$    & CRRA coefficient           & $-2.0$ & Lecture 5 \\
+$\gamma$  & Labor disutility curvature & 2.5    & Lecture 5 \\
+$\beta_0$ & Baseline labor disutility  & 0.1    & Lecture 5 \\
+$\beta_1$ & Child penalty (disutility) & 0.056  & Kleven et al.\ (2019) \\
+$\alpha$  & Return to human capital    & 0.1    & Lecture 5 \\
+$\bar{w}$ & Base wage                  & 1.0    & Normalization \\
+$\tau$    & Labor income tax           & 0.1    & Lecture 5 \\
+$r$       & Interest rate              & 0.02   & Standard \\
+$p_b$     & Birth probability          & 0.1    & Lecture 5 \\
+$\phi$    & Leave replacement rate     & 0.9    & Danish law \\
+$\delta_1$& HC depreciation (father)   & 0.0    & Estimated \\
+$\delta_2$& HC depreciation (mother)   & 0.05   & Estimated \\
+$\bar{L}$ & Total leave (periods)      & 1      & Normalization \\
+$\bar{q}$ & Paternity quota            & 0--0.5 & Policy \\
+\bottomrule
+\end{tabular}
+\end{table}
