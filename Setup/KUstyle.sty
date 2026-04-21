@@ -50,11 +50,10 @@
     \noindent\fontsize{11}{11}\selectfont \@date 
     \end{textblock}
     
-    \ifdefined\@advisor
-        \begin{textblock}{10}(1.5,14.2)
-        \noindent\fontsize{11}{11}\selectfont \@advisor 
-        \end{textblock}
-    \fi
+    \begin{textblock}{10}(1.5,14.2)
+    \noindent\fontsize{11}{11}\selectfont
+    \colorbox{white}{\makebox[9.8cm][l]{\strut\ifdefined\@advisor\@advisor\fi}}
+    \end{textblock}
     
     \newpage
     \noindent
