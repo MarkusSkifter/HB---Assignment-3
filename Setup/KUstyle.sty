@@ -50,9 +50,14 @@
     \noindent\fontsize{11}{11}\selectfont \@date 
     \end{textblock}
     
-    \begin{textblock}{10}(1.5,14.2)
-    \noindent\fontsize{11}{11}\selectfont
-    \colorbox{white}{\makebox[9.8cm][l]{\strut\ifdefined\@advisor\@advisor\fi}}
+    \ifdefined\@advisor
+        \begin{textblock}{10}(1.5,14.2)
+        \noindent\fontsize{11}{11}\selectfont \@advisor
+        \end{textblock}
+    \fi
+    % Cover placeholder »» baked into background PDF
+    \begin{textblock}{12}(1.3,2.2)
+    \noindent\colorbox{white}{\makebox[12cm][l]{\rule{0pt}{18pt}}}
     \end{textblock}
     
     \newpage
