@@ -1,0 +1,88 @@
+% IMPORTANT! Compile with XeLaTeX or LuaLaTeX + Biber
+\documentclass[12pt]{article}
+
+\usepackage{KUstyle}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{setspace}
+\usepackage{tabularx}
+\usepackage{fontspec}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage[english]{babel}
+
+\usepackage[listings]{tcolorbox}
+\tcbuselibrary{listings,theorems}
+
+
+
+% Bibliography
+\usepackage[
+  backend=biber,
+  style=authoryear,
+  natbib=true
+]{biblatex}
+\addbibresource{Afsnit/library.bib} % <- your .bib file
+
+\usepackage[
+  colorlinks=false,
+  pdfborder={0 0 1},
+  citebordercolor={0 1 0},
+  linkbordercolor={0 1 0},
+  urlbordercolor={0 1 0}
+]{hyperref}
+
+\setmainfont{Arial}
+
+% Front page info
+\ptype{Household behaviour over the lifecycle}
+\author{Markus Emil Skifter}
+\title{Assignment 2}
+\subtitle{Life-Cycle Labor Supply of Couples}
+\date{April 2026}
+\advisor{}
+
+\renewcommand{\contentsname}{Table of contents}
+
+\setcounter{secnumdepth}{0}
+
+
+\begin{document}
+
+\maketitle
+
+\onehalfspacing
+
+\newpage
+\tableofcontents
+\newpage
+
+{\fontfamily{ptm}\selectfont
+
+
+\newpage
+\input{Afsnit/Baseline model}
+
+\newpage
+\input{Afsnit/Opgave 1}
+
+% \newpage
+\input{Afsnit/Opgave 2}
+
+\newpage
+\input{Afsnit/Opgave 3}
+
+% \newpage
+\input{Afsnit/Opgave 4}
+
+% \newpage
+\input{Afsnit/Opgave 5}
+
+\input{Afsnit/Opgave 6}
+
+
+\newpage
+\printbibliography
+\input{Afsnit/Appendix}
+} % closes {\fontfamily{ptm}\selectfont
+
+\end{document}
