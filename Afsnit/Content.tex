@@ -1,0 +1,58 @@
+\section{Research Question}
+
+How do mandatory paternity leave quotas affect the life-cycle gender wage gap and household welfare? Specifically, does forcing fathers to take a minimum share of parental leave reduce the long-run earnings gap between partners, and at what welfare cost?
+
+\section{Motivation}
+
+Using Danish register data, \citet{kleven2019children} document a sharp ``child penalty'': mothers' earnings fall by roughly 20 percentage points relative to childless women after first birth, while fathers are unaffected. A central driver is that mothers take approximately 80 percent of total parental leave, interrupting their human capital accumulation. Several Nordic countries have introduced paternity leave quotas to redistribute this career cost. Whether such quotas reduce the gender wage gap, and whether the long-run gain in female earnings outweighs the short-run household income loss, is a quantitative question that requires a structural life-cycle model.
+
+\section{Model}
+
+We propose a finite-horizon household model with two earners, indexed $i \in \{1,2\}$ (father and mother), over $T$ periods. The household maximises joint lifetime utility:
+\[
+    \mathbb{E}_0\!\left[\sum_{t=0}^{T-1} \rho^t\, u(c_t, h_{1,t}, h_{2,t}, n_t)\right],
+\]
+with period utility
+\[
+    u = \frac{c_t^{1+\eta}}{1+\eta} - (\beta_0 + \beta_1 n_t)\!\left[\frac{h_{1,t}^{1+\gamma}}{1+\gamma} + \frac{h_{2,t}^{1+\gamma}}{1+\gamma}\right],
+\]
+where $c_t$ is consumption, $h_{i,t}$ are hours worked, $n_t \in \{0,1\}$ indicates a child, and $\beta_1 > 0$ captures the additional disutility of market work when a child is present.
+
+\paragraph{Wages and human capital.}
+The after-tax wage of agent $i$ is
+\[
+    w_{i,t} = (1-\tau)\,\bar{w}\,(1 + \alpha\, k_{i,t}),
+\]
+where $k_{i,t}$ is accumulated human capital. Human capital grows with hours worked and depreciates during parental leave:
+\[
+    k_{i,t+1} = k_{i,t}(1 - \delta_i\, l_{i,t}) + h_{i,t},
+\]
+where $l_{i,t} \in [0,1]$ is the share of the period spent on leave and $\delta_i \geq 0$ is the depreciation rate. The key asymmetry is $\delta_2 \geq \delta_1$: leave is more costly to the mother's career, consistent with \citet{kleven2019children}.
+
+\paragraph{Fertility and parental leave.}
+A child arrives with probability $p_b$ if $n_t = 0$. Upon birth, the household splits total leave $\bar{L}$ between partners: the father takes share $\lambda_t$ and the mother takes $1-\lambda_t$. Each receives a wage replacement at rate $\phi$. The policy constraint is:
+\[
+    \lambda_t \geq \bar{q} \qquad \text{if a birth occurs},
+\]
+where $\bar{q} \in [0, 0.5]$ is the mandatory paternity quota. The household budget constraint is:
+\[
+    c_t + a_{t+1} = (1+r)\,a_t + \sum_{i}\bigl[w_{i,t}\,h_{i,t} + \phi\,\bar{w}\,l_{i,t}\bigr].
+\]
+
+\paragraph{Bellman equation.}
+The state is $s_t = (a_t, k_{1,t}, k_{2,t}, n_t)$. The value function satisfies:
+\[
+    V_t(s_t) = \max_{c_t,\, h_{1,t},\, h_{2,t},\, \lambda_t}\!\left\{u(c_t, h_{1,t}, h_{2,t}, n_t) + \rho\,\mathbb{E}_t[V_{t+1}(s_{t+1})]\right\},
+\]
+subject to the budget constraint, human capital evolution, fertility, and the quota constraint. The model is solved by backward induction. Policy experiments compare simulated life-cycle outcomes --- the gender wage gap $G_t = (w_{1,t}-w_{2,t})/w_{1,t}$, female labor supply, and welfare $V_0$ --- across quota levels $\bar{q} \in \{0,\, 0.1,\, 0.5\}$.
+
+\section{Data}
+
+To estimate the model's structural parameters via simulated method of moments, the following data sources are needed:
+
+\begin{itemize}
+    \item \textbf{Danish administrative registers (IDA):} matched employer-employee data providing wages and hours by gender and parental status, used to identify $\alpha$, $\delta_1$, $\delta_2$ and to match the child penalty documented in \citet{kleven2019children}.
+    \item \textbf{Barselstatistik (Statistics Denmark):} leave spell lengths by parent, used to calibrate the baseline distribution of $\lambda_t$ and total leave length $\bar{L}$.
+    \item \textbf{Danish Labor Force Survey (AKU):} hours worked and employment rates by parental status, used to calibrate the labor disutility parameters $\beta_0$, $\beta_1$, $\gamma$.
+    \item \textbf{Danish social insurance rules:} the statutory replacement rate $\phi \approx 0.9$ (barselsdagpenge) is taken directly from legislation and requires no estimation.
+\end{itemize}
