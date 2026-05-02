@@ -1,58 +1,68 @@
-\section{Research Question}
+\section*{Research Question}
 
 How do mandatory paternity leave quotas affect the life-cycle gender wage gap and household welfare? Specifically, does forcing fathers to take a minimum share of parental leave reduce the long-run earnings gap between partners, and at what welfare cost?
 
-\section{Motivation}
+\section*{Motivation}
 
-Using Danish register data, \citet{kleven2019children} document a sharp ``child penalty'': mothers' earnings fall by roughly 20 percentage points relative to childless women after first birth, while fathers are unaffected. A central driver is that mothers take approximately 80 percent of total parental leave, interrupting their human capital accumulation. Several Nordic countries have introduced paternity leave quotas to redistribute this career cost. Whether such quotas reduce the gender wage gap, and whether the long-run gain in female earnings outweighs the short-run household income loss, is a quantitative question that requires a structural life-cycle model.
+Using Danish register data, \citet{kleven2019children} document a sharp ``child penalty'': mothers' earnings fall by roughly 20 percentage points relative to childless women after first birth, while fathers are unaffected. A central driver is that mothers take approximately 80 percent of total parental leave, interrupting their human capital accumulation. \citet{kleven2019childpenalties} show that this pattern is pervasive across countries, and \citet{patnaik2019reserving} finds that earmarked paternity quotas substantially shift leave allocation toward fathers. Whether such quotas reduce the gender wage gap, and whether the long-run gain in female earnings outweighs the short-run household income loss, is a quantitative question that requires a structural life-cycle model.
 
-\section{Model}
+\section*{Model}
 
-We propose a finite-horizon household model with two earners, indexed $i \in \{1,2\}$ (father and mother), over $T$ periods. The household maximises joint lifetime utility:
-\[
-    \mathbb{E}_0\!\left[\sum_{t=0}^{T-1} \rho^t\, u(c_t, h_{1,t}, h_{2,t}, n_t)\right],
-\]
+We propose a finite-horizon two-earner household model in the spirit of \citet{borella2023marriage}, indexed by $i \in \{1,2\}$ (father and mother), over $T$ periods. The household maximises joint expected lifetime utility by jointly choosing consumption, hours, and the leave allocation, subject to wages that depend on accumulated human capital and a policy constraint on the father's minimum leave share.
+
+\subsection*{Recursive Formulation}
+
+Let the state be $s_t = (a_t, K_{1,t}, K_{2,t}, n_t)$, where $a_t$ is assets, $K_{i,t}$ is human capital, and $n_t \in \{0,1\}$ indicates the presence of a child. The Bellman equation is
+\begin{equation}
+    V_t(s_t) = \max_{c_t,\, h_{1,t},\, h_{2,t},\, \lambda_t}\;\Bigl\{ U(c_t, h_{1,t}, h_{2,t}, n_t) + \rho\,\mathbb{E}_t\!\left[V_{t+1}(s_{t+1})\right]\Bigr\},
+\end{equation}
 with period utility
-\[
-    u = \frac{c_t^{1+\eta}}{1+\eta} - (\beta_0 + \beta_1 n_t)\!\left[\frac{h_{1,t}^{1+\gamma}}{1+\gamma} + \frac{h_{2,t}^{1+\gamma}}{1+\gamma}\right],
-\]
-where $c_t$ is consumption, $h_{i,t}$ are hours worked, $n_t \in \{0,1\}$ indicates a child, and $\beta_1 > 0$ captures the additional disutility of market work when a child is present.
+\begin{equation}
+    U(c_t, h_{1,t}, h_{2,t}, n_t) = \frac{c_t^{1+\eta}}{1+\eta} - (\beta_0 + \beta_1 n_t)\!\left[\frac{h_{1,t}^{1+\gamma}}{1+\gamma} + \frac{h_{2,t}^{1+\gamma}}{1+\gamma}\right],
+\end{equation}
+where $\beta_1 > 0$ captures the additional disutility of market work in the presence of a child.
 
-\paragraph{Wages and human capital.}
+\subsection*{Wages and Human Capital}
+
 The after-tax wage of agent $i$ is
-\[
-    w_{i,t} = (1-\tau)\,\bar{w}\,(1 + \alpha\, k_{i,t}),
-\]
-where $k_{i,t}$ is accumulated human capital. Human capital grows with hours worked and depreciates during parental leave:
-\[
-    k_{i,t+1} = k_{i,t}(1 - \delta_i\, l_{i,t}) + h_{i,t},
-\]
-where $l_{i,t} \in [0,1]$ is the share of the period spent on leave and $\delta_i \geq 0$ is the depreciation rate. The key asymmetry is $\delta_2 \geq \delta_1$: leave is more costly to the mother's career, consistent with \citet{kleven2019children}.
+\begin{equation}
+    w_{i,t} = (1-\tau)\,\bar{w}\,(1 + \alpha\, K_{i,t}),
+\end{equation}
+and human capital evolves as
+\begin{equation}
+    K_{i,t+1} = K_{i,t}\,(1 - \delta_i\, l_{i,t}) + h_{i,t},
+\end{equation}
+where $l_{i,t} \in [0,1]$ is the share of the period spent on leave and $\delta_i \geq 0$ is the depreciation rate during leave. The key asymmetry is $\delta_2 \geq \delta_1$: leave is more costly for the mother's career, consistent with the child-penalty evidence in \citet{kleven2019children}.
 
-\paragraph{Fertility and parental leave.}
-A child arrives with probability $p_b$ if $n_t = 0$. Upon birth, the household splits total leave $\bar{L}$ between partners: the father takes share $\lambda_t$ and the mother takes $1-\lambda_t$. Each receives a wage replacement at rate $\phi$. The policy constraint is:
-\[
-    \lambda_t \geq \bar{q} \qquad \text{if a birth occurs},
-\]
-where $\bar{q} \in [0, 0.5]$ is the mandatory paternity quota. The household budget constraint is:
-\[
-    c_t + a_{t+1} = (1+r)\,a_t + \sum_{i}\bigl[w_{i,t}\,h_{i,t} + \phi\,\bar{w}\,l_{i,t}\bigr].
-\]
+\subsection*{Fertility, Leave, and Policy}
 
-\paragraph{Bellman equation.}
-The state is $s_t = (a_t, k_{1,t}, k_{2,t}, n_t)$. The value function satisfies:
-\[
-    V_t(s_t) = \max_{c_t,\, h_{1,t},\, h_{2,t},\, \lambda_t}\!\left\{u(c_t, h_{1,t}, h_{2,t}, n_t) + \rho\,\mathbb{E}_t[V_{t+1}(s_{t+1})]\right\},
-\]
-subject to the budget constraint, human capital evolution, fertility, and the quota constraint. The model is solved by backward induction. Policy experiments compare simulated life-cycle outcomes --- the gender wage gap $G_t = (w_{1,t}-w_{2,t})/w_{1,t}$, female labor supply, and welfare $V_0$ --- across quota levels $\bar{q} \in \{0,\, 0.1,\, 0.5\}$.
+A child arrives with probability $p_b$ if $n_t = 0$. Upon birth, total leave $\bar{L}$ is split between partners: the father takes share $\lambda_t$ and the mother takes $1-\lambda_t$, with each receiving a wage replacement at rate $\phi$. The mandatory paternity quota imposes
+\begin{equation}
+    \lambda_t \geq \bar{q}\quad\text{if a birth occurs in period }t,
+\end{equation}
+where $\bar{q} \in [0, 0.5]$ is the policy instrument. Given hours $h_{i,t}$ and leave shares $l_{i,t}$, the household budget constraint is
+\begin{equation}
+    c_t + a_{t+1} = (1+r)\,a_t + \sum_{i=1}^{2}\bigl[w_{i,t}\,h_{i,t} + \phi\,\bar{w}\,l_{i,t}\bigr].
+\end{equation}
 
-\section{Data}
+\subsection*{Mechanism}
 
-To estimate the model's structural parameters via simulated method of moments, the following data sources are needed:
+Two forces interact. First, a higher $\bar{q}$ shifts leave from mother to father, dampening the depreciation $\delta_2 (1-\lambda_t)\bar{L}$ on her human capital and raising her future wage through (3)–(4). Second, because $\delta_1 < \delta_2$, reallocating leave is costly in terms of \emph{aggregate} human capital and household income. The optimal $\bar{q}$ balances these gains and losses against the policy-maker's distributional objective. The model is solved by backward induction.
 
+\section*{Identification and Counterfactuals}
+
+We use the model to answer the research question in two steps. First, we estimate the structural parameters $\theta = (\eta, \gamma, \beta_0, \beta_1, \alpha, \delta_1, \delta_2, p_b, \rho)$ by simulated method of moments, matching pre-birth and post-birth profiles of hours, wages, and leave take-up by gender. The asymmetry $\delta_2 - \delta_1$ is identified by the cross-gender difference in the post-birth wage trajectory documented by \citet{kleven2019children}.
+
+Second, we run counterfactual simulations across $\bar{q} \in \{0,\, 0.10,\, 0.25,\, 0.50\}$ and report (i) the life-cycle gender wage gap $G_t = (w_{1,t}-w_{2,t})/w_{1,t}$, (ii) female labor supply, and (iii) ex-ante welfare $V_0(s_0)$. Comparing $G_t$ and $V_0$ across quotas traces out the policy frontier between long-run wage convergence and short-run household income loss.
+
+\section*{Data}
+
+To estimate the structural parameters and validate the counterfactuals, we use:
 \begin{itemize}
-    \item \textbf{Danish administrative registers (IDA):} matched employer-employee data providing wages and hours by gender and parental status, used to identify $\alpha$, $\delta_1$, $\delta_2$ and to match the child penalty documented in \citet{kleven2019children}.
-    \item \textbf{Barselstatistik (Statistics Denmark):} leave spell lengths by parent, used to calibrate the baseline distribution of $\lambda_t$ and total leave length $\bar{L}$.
-    \item \textbf{Danish Labor Force Survey (AKU):} hours worked and employment rates by parental status, used to calibrate the labor disutility parameters $\beta_0$, $\beta_1$, $\gamma$.
-    \item \textbf{Danish social insurance rules:} the statutory replacement rate $\phi \approx 0.9$ (barselsdagpenge) is taken directly from legislation and requires no estimation.
+    \item \textbf{Danish administrative registers (IDA):} matched employer-employee data on wages and hours by gender and parental status, used to identify $\alpha$, $\delta_1$, $\delta_2$ and to match the child penalty in \citet{kleven2019children}.
+    \item \textbf{Barselstatistik (Statistics Denmark):} parental leave spell lengths by parent, used to calibrate $\bar{L}$ and the baseline distribution of $\lambda_t$.
+    \item \textbf{Danish Labor Force Survey (AKU):} hours worked and employment rates by parental status, used to pin down the labor disutility parameters $\beta_0$, $\beta_1$, $\gamma$.
+    \item \textbf{Danish social-insurance rules:} the statutory replacement rate $\phi \approx 0.9$ (\emph{barselsdagpenge}) is taken directly from legislation and requires no estimation.
 \end{itemize}
+
+\noindent For external validation, the introduction of the 2022 Danish earmarked paternity quota provides a quasi-experimental setting against which the model's predicted change in $\lambda_t$ and $G_t$ can be benchmarked, similar in spirit to \citet{patnaik2019reserving} and \citet{carneiro2015flying}.
