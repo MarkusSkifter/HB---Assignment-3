@@ -36,24 +36,32 @@ where $l_{i,t} \in [0,1]$ is the share of the period spent on leave and $\delta_
 
 \subsection*{Fertility, Leave, and Policy}
 
-A child arrives with probability $p_b$ if $n_t = 0$. Upon birth, total leave $\bar{L}$ is split between partners: the father takes share $\lambda_t$ and the mother takes $1-\lambda_t$, with each receiving a wage replacement at rate $\phi$. The mandatory paternity quota imposes
+A child arrives with probability $p_b$ if $n_t = 0$. Upon birth, total leave $\bar{L}$ is split between partners: the father takes share $\lambda_t$ and the mother takes $1-\lambda_t$, with each receiving a wage replacement at rate $\phi$. Each agent's time is split between work and leave,
+\begin{equation}
+    h_{i,t} + l_{i,t} \;\leq\; 1, \qquad l_{i,t} \geq 0,\; h_{i,t} \geq 0,
+\end{equation}
+and the mandatory paternity quota imposes
 \begin{equation}
     \lambda_t \geq \bar{q}\quad\text{if a birth occurs in period }t,
 \end{equation}
-where $\bar{q} \in [0, 0.5]$ is the policy instrument. Given hours $h_{i,t}$ and leave shares $l_{i,t}$, the household budget constraint is
+where $\bar{q} \in [0, 0.5]$ is the policy instrument. The household budget constraint is
 \begin{equation}
     c_t + a_{t+1} = (1+r)\,a_t + \sum_{i=1}^{2}\bigl[w_{i,t}\,h_{i,t} + \phi\,\bar{w}\,l_{i,t}\bigr].
 \end{equation}
 
 \subsection*{Mechanism}
 
-Two forces interact. First, a higher $\bar{q}$ shifts leave from mother to father, dampening the depreciation $\delta_2 (1-\lambda_t)\bar{L}$ on her human capital and raising her future wage through (3)–(4). Second, because $\delta_1 < \delta_2$, reallocating leave is costly in terms of \emph{aggregate} human capital and household income. The optimal $\bar{q}$ balances these gains and losses against the policy-maker's distributional objective. The model is solved by backward induction.
+Two forces interact. First, a higher $\bar{q}$ shifts leave from mother to father, dampening the depreciation $\delta_2 (1-\lambda_t)\bar{L}$ on her human capital and raising her future wage through (3)--(4). Second, because $\delta_1 < \delta_2$, reallocating leave is costly in terms of \emph{aggregate} human capital and household income. The optimal $\bar{q}$ balances these gains and losses against the policy-maker's distributional objective. The model is solved by backward induction.
 
 \section*{Identification and Counterfactuals}
 
 We use the model to answer the research question in two steps. First, we estimate the structural parameters $\theta = (\eta, \gamma, \beta_0, \beta_1, \alpha, \delta_1, \delta_2, p_b, \rho)$ by simulated method of moments, matching pre-birth and post-birth profiles of hours, wages, and leave take-up by gender. The asymmetry $\delta_2 - \delta_1$ is identified by the cross-gender difference in the post-birth wage trajectory documented by \citet{kleven2019children}.
 
-Second, we run counterfactual simulations across $\bar{q} \in \{0,\, 0.10,\, 0.25,\, 0.50\}$ and report (i) the life-cycle gender wage gap $G_t = (w_{1,t}-w_{2,t})/w_{1,t}$, (ii) female labor supply, and (iii) ex-ante welfare $V_0(s_0)$. Comparing $G_t$ and $V_0$ across quotas traces out the policy frontier between long-run wage convergence and short-run household income loss.
+Second, we run counterfactual simulations across $\bar{q} \in \{0,\, 0.10,\, 0.25,\, 0.50\}$ and report (i) the life-cycle gender wage gap $G_t = (w_{1,t}-w_{2,t})/w_{1,t}$, (ii) female labor supply, and (iii) the consumption-equivalent welfare gain $\xi(\bar{q})$, defined as the proportional increase in lifetime consumption under $\bar{q}=0$ that would leave the household indifferent to the quota policy:
+\begin{equation}
+    V_0\!\left(s_0;\, \bar{q}\right) \;=\; V_0\!\left(s_0;\, \bar{q}=0,\, c_t \cdot (1+\xi)\right).
+\end{equation}
+Tracing $\xi(\bar{q})$ and $G_t(\bar{q})$ jointly maps out the policy frontier between long-run wage convergence and short-run household income loss.
 
 \section*{Data}
 
