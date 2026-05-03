@@ -12,31 +12,35 @@ We propose a finite-horizon two-earner household model in the spirit of \citet{b
 
 \subsection*{Recursive Formulation}
 
-Let the state be $s_t = (a_t, K_{1,t}, K_{2,t}, n_t)$, where $a_t$ is assets, $K_{i,t}$ is human capital, and $n_t \in \{0,1\}$ indicates the presence of a child. The Bellman equation is
+The state is $(n_t, a_t, k_{1,t}, k_{2,t})$, where $n_t \in \{0,1\}$ indicates the presence of a child, $a_t$ is assets, and $k_{i,t}$ is human capital of member $i$. The Bellman equation is
 \begin{equation}
-    V_t(s_t) = \max_{c_t,\, h_{1,t},\, h_{2,t},\, \lambda_t}\;\Bigl\{ U(c_t, h_{1,t}, h_{2,t}, n_t) + \rho\,\mathbb{E}_t\!\left[V_{t+1}(s_{t+1})\right]\Bigr\},
+    V_t(n_t, a_t, k_{1,t}, k_{2,t}) = \max_{c_t,\, h_{1,t},\, h_{2,t},\, \lambda_t}\;\Bigl\{ U(c_t, h_{1,t}, h_{2,t}, n_t) + \rho\,\mathbb{E}_t\!\left[V_{t+1}(n_{t+1}, a_{t+1}, k_{1,t+1}, k_{2,t+1})\right]\Bigr\},
 \end{equation}
 with period utility
 \begin{equation}
     U(c_t, h_{1,t}, h_{2,t}, n_t) = \frac{c_t^{1+\eta}}{1+\eta} - \beta(n_t)\!\left[\frac{h_{1,t}^{1+\gamma}}{1+\gamma} + \frac{h_{2,t}^{1+\gamma}}{1+\gamma}\right],
 \end{equation}
-where $\beta_1 > 0$ captures the additional disutility of market work in the presence of a child.
+where $\beta(n_t) = \beta_0 + \beta_1\, n_t$ and $\beta_1 > 0$ captures the additional disutility of market work in the presence of a child. The model nests the childless case at $\beta_1 = 0$.
 
 \subsection*{Wages and Human Capital}
 
-The after-tax wage of agent $i$ is
+Following the simple-model setup of lecture 5, wages are pre-tax and linear in own human capital,
 \begin{equation}
-    w_{i,t} = (1-\tau)\,\bar{w}\,(1 + \alpha\, K_{i,t}),
+    w_{i,t} = w\,(1 + \alpha\, k_{i,t}),
 \end{equation}
-and human capital evolves as
+and human capital evolves with hours worked and depreciates only with parental leave,
 \begin{equation}
-    K_{i,t+1} = K_{i,t}\,(1 - \delta_i\, l_{i,t}) + h_{i,t},
+    k_{i,t+1} = k_{i,t}\,(1 - \delta_i\, l_{i,t}) + h_{i,t},
 \end{equation}
-where $l_{i,t} \in [0,1]$ is the share of the period spent on leave and $\delta_i \geq 0$ is the depreciation rate during leave. The key asymmetry is $\delta_2 \geq \delta_1$: leave is more costly for the mother's career, consistent with the child-penalty evidence in \citet{kleven2019children}.
+where $l_{i,t} \in [0,1]$ is the share of period $t$ that member $i$ spends on leave and $\delta_i \geq 0$ is the depreciation rate. The key asymmetry is $\delta_2 \geq \delta_1$: leave is more costly for the mother's career, consistent with the child-penalty evidence in \citet{kleven2019children}.
 
 \subsection*{Fertility, Leave, and Policy}
 
-A child arrives with probability $p_b$ if $n_t = 0$. Upon birth, total leave $\bar{L}$ is split between partners: the father takes share $\lambda_t$ and the mother takes $1-\lambda_t$, with each receiving a wage replacement at rate $\phi$. Each agent's time is split between work and leave,
+A child arrives stochastically with probability
+\begin{equation}
+    p(n_t) = \begin{cases} p_b & \text{if } n_t = 0,\\ 0 & \text{if } n_t = 1,\end{cases}
+\end{equation}
+so $n_{t+1} = n_t + 1$ with probability $p(n_t)$ and $n_{t+1} = n_t$ otherwise. Upon birth, total leave $\bar{L}$ is split between the partners: the father takes share $\lambda_t$ and the mother takes $1-\lambda_t$, with each receiving a wage replacement at rate $\phi$. Each agent's time is split between work and leave,
 \begin{equation}
     h_{i,t} + l_{i,t} \;\leq\; 1, \qquad l_{i,t} \geq 0,\; h_{i,t} \geq 0,
 \end{equation}
@@ -44,9 +48,9 @@ and the mandatory paternity quota imposes
 \begin{equation}
     \lambda_t \geq \bar{q}\quad\text{if a birth occurs in period }t,
 \end{equation}
-where $\bar{q} \in [0, 0.5]$ is the policy instrument. The household budget constraint is
+where $\bar{q} \in [0, 0.5]$ is the policy instrument. With taxes applied to labor income and replacement received during leave, the household budget constraint is
 \begin{equation}
-    c_t + a_{t+1} = (1+r)\,a_t + \sum_{i=1}^{2}\bigl[w_{i,t}\,h_{i,t} + \phi\,\bar{w}\,l_{i,t}\bigr].
+    a_{t+1} = (1+r)\!\left(a_t + \sum_{i=1}^{2}\!\bigl[(1-\tau_t)\,w_{i,t}\,h_{i,t} + \phi\, w\, l_{i,t}\bigr] - c_t\right).
 \end{equation}
 
 \subsection*{Mechanism}
@@ -59,7 +63,7 @@ We use the model to answer the research question in two steps. First, we estimat
 
 Second, we run counterfactual simulations across $\bar{q} \in \{0,\, 0.10,\, 0.25,\, 0.50\}$ and report (i) the life-cycle gender wage gap $G_t = (w_{1,t}-w_{2,t})/w_{1,t}$, (ii) female labor supply, and (iii) the consumption-equivalent welfare gain $\xi(\bar{q})$, defined as the proportional increase in lifetime consumption under $\bar{q}=0$ that would leave the household indifferent to the quota policy:
 \begin{equation}
-    V_0\!\left(s_0;\, \bar{q}\right) \;=\; V_0\!\left(s_0;\, \bar{q}=0,\, c_t \cdot (1+\xi)\right).
+    V_0\!\left(n_0, a_0, k_{1,0}, k_{2,0};\, \bar{q}\right) \;=\; V_0\!\left(n_0, a_0, k_{1,0}, k_{2,0};\, \bar{q}=0,\, c_t \cdot (1+\xi)\right).
 \end{equation}
 Tracing $\xi(\bar{q})$ and $G_t(\bar{q})$ jointly maps out the policy frontier between long-run wage convergence and short-run household income loss.
 
