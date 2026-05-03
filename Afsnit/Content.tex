@@ -10,44 +10,6 @@ Using Danish register data, \citet{kleven2019children} document a sharp ``child 
 
 We propose a finite-horizon two-earner household model in the spirit of \citet{borella2023marriage}, indexed by $i \in \{1,2\}$ (father and mother), over $T$ periods. The household maximises joint expected lifetime utility by jointly choosing consumption, hours, and the leave allocation, subject to wages that depend on accumulated human capital and a policy constraint on the father's minimum leave share. Table~\ref{tab:params} lists the parameters of the model.
 
-\begin{table}[h]
-\centering
-\small
-\begin{tabular}{@{}ll@{}}
-\toprule
-\textbf{Symbol} & \textbf{Represents} \\
-\midrule
-$T$            & Length of the life cycle (number of periods the household lives) \\
-$\rho$         & Time discount factor: how much future utility is worth today \\
-$r$            & Interest rate on savings $a_t$ \\
-$\eta$         & Curvature of utility from consumption (risk aversion / EIS) \\
-$\gamma$       & Curvature of disutility from working hours \\
-$\beta_0$      & Baseline weight on labor disutility (no child present) \\
-$\beta_1$      & Extra labor disutility when a child is present in the household \\
-$\bar{w}$      & Common pre-tax wage level (efficiency-units price of labor) \\
-$\tau$         & Proportional labor income tax rate \\
-$\alpha$       & Wage return to one unit of human capital \\
-$\delta_1$     & Father's human capital depreciation rate while on leave \\
-$\delta_2$     & Mother's human capital depreciation rate while on leave \\
-$p_b$          & Probability of a birth in a given period when childless \\
-$\bar{L}$      & Total parental leave time available to the household per birth \\
-$\phi$         & Replacement rate of wages while on parental leave \\
-$\bar{q}$      & Policy instrument: minimum share of leave the father must take \\
-\midrule
-$c_t$          & Household consumption in period $t$ \\
-$h_{i,t}$      & Hours worked by member $i$ in period $t$ \\
-$l_{i,t}$      & Share of period $t$ that member $i$ spends on parental leave \\
-$\lambda_t$    & Father's share of total leave at the period of birth \\
-$K_{i,t}$      & Human capital stock of member $i$ at the start of period $t$ \\
-$w_{i,t}$      & After-tax wage of member $i$ in period $t$ \\
-$a_t$          & Household assets at the start of period $t$ \\
-$n_t$          & Indicator for the presence of a child ($n_t \in \{0,1\}$) \\
-\bottomrule
-\end{tabular}
-\caption{Model parameters (top) and choice/state variables (bottom) and what they represent.}
-\label{tab:params}
-\end{table}
-
 \subsection*{Recursive Formulation}
 
 Let the state be $s_t = (a_t, K_{1,t}, K_{2,t}, n_t)$, where $a_t$ is assets, $K_{i,t}$ is human capital, and $n_t \in \{0,1\}$ indicates the presence of a child. The Bellman equation is
@@ -56,7 +18,7 @@ Let the state be $s_t = (a_t, K_{1,t}, K_{2,t}, n_t)$, where $a_t$ is assets, $K
 \end{equation}
 with period utility
 \begin{equation}
-    U(c_t, h_{1,t}, h_{2,t}, n_t) = \frac{c_t^{1+\eta}}{1+\eta} - (\beta_0 + \beta_1 n_t)\!\left[\frac{h_{1,t}^{1+\gamma}}{1+\gamma} + \frac{h_{2,t}^{1+\gamma}}{1+\gamma}\right],
+    U(c_t, h_{1,t}, h_{2,t}, n_t) = \frac{c_t^{1+\eta}}{1+\eta} - \beta(n_t)\!\left[\frac{h_{1,t}^{1+\gamma}}{1+\gamma} + \frac{h_{2,t}^{1+\gamma}}{1+\gamma}\right],
 \end{equation}
 where $\beta_1 > 0$ captures the additional disutility of market work in the presence of a child.
 
