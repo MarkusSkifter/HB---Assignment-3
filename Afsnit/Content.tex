@@ -8,7 +8,36 @@ Using Danish register data, \citet{kleven2019children} document a sharp ``child 
 
 \section*{Model}
 
-We propose a finite-horizon two-earner household model in the spirit of \citet{borella2023marriage}, indexed by $i \in \{1,2\}$ (father and mother), over $T$ periods. The household maximises joint expected lifetime utility by jointly choosing consumption, hours, and the leave allocation, subject to wages that depend on accumulated human capital and a policy constraint on the father's minimum leave share.
+We propose a finite-horizon two-earner household model in the spirit of \citet{borella2023marriage}, indexed by $i \in \{1,2\}$ (father and mother), over $T$ periods. The household maximises joint expected lifetime utility by jointly choosing consumption, hours, and the leave allocation, subject to wages that depend on accumulated human capital and a policy constraint on the father's minimum leave share. Table~\ref{tab:params} lists the parameters of the model.
+
+\begin{table}[h]
+\centering
+\small
+\begin{tabular}{@{}llc@{}}
+\toprule
+\textbf{Symbol} & \textbf{Description} & \textbf{Source} \\
+\midrule
+$T$            & Number of life-cycle periods                                & Calibrated \\
+$\rho$         & Discount factor                                              & Calibrated \\
+$r$            & Risk-free interest rate                                      & Calibrated \\
+$\eta$         & CRRA coefficient (consumption curvature)                     & Estimated (SMM) \\
+$\gamma$       & Curvature on labor disutility                                & Estimated (SMM) \\
+$\beta_0$      & Labor disutility weight, no child                            & Estimated (SMM) \\
+$\beta_1$      & Additional labor disutility when a child is present          & Estimated (SMM) \\
+$\bar{w}$      & Pre-tax wage level                                           & Calibrated \\
+$\tau$         & Labor income tax rate                                        & Legislation \\
+$\alpha$       & Return on human capital                                      & Estimated (SMM) \\
+$\delta_1$     & Human capital depreciation during leave, father              & Estimated (SMM) \\
+$\delta_2$     & Human capital depreciation during leave, mother              & Estimated (SMM) \\
+$p_b$          & Per-period birth probability when $n_t = 0$                  & Calibrated \\
+$\bar{L}$      & Total parental leave time per birth                          & Calibrated \\
+$\phi$         & Wage replacement rate during leave (\emph{barselsdagpenge})  & Legislation \\
+$\bar{q}$      & Mandatory paternity leave quota (policy instrument)          & Counterfactual \\
+\bottomrule
+\end{tabular}
+\caption{Model parameters and their role.}
+\label{tab:params}
+\end{table}
 
 \subsection*{Recursive Formulation}
 
