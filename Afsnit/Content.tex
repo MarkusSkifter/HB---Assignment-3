@@ -59,9 +59,13 @@ Two forces interact. First, a higher $\bar{q}$ shifts leave from mother to fathe
 
 \section*{Identification and Counterfactuals}
 
-We use the model to answer the research question in two steps. First, we estimate the structural parameters $\theta = (\eta, \gamma, \beta_0, \beta_1, \alpha, \delta_1, \delta_2, p_b, \rho)$ by simulated method of moments, matching pre-birth and post-birth profiles of hours, wages, and leave take-up by gender. The asymmetry $\delta_2 - \delta_1$ is identified by the cross-gender difference in the post-birth wage trajectory documented by \citet{kleven2019children}.
+The implementation is a modest extension of the lecture-5 simple model: a second earner, an asymmetric depreciation term that bites only with parental leave, and the policy lever $\bar{q}$. The workflow follows Assignments 1 and 2 of this course --- calibrate, solve, simulate, run policy counterfactuals --- rather than a full structural estimation.
 
-Second, we run counterfactual simulations across $\bar{q} \in \{0,\, 0.10,\, 0.25,\, 0.50\}$ and report (i) the life-cycle gender wage gap $G_t = (w_{1,t}-w_{2,t})/w_{1,t}$, (ii) female labor supply, and (iii) the consumption-equivalent welfare gain $\xi(\bar{q})$, defined as the proportional increase in lifetime consumption under $\bar{q}=0$ that would leave the household indifferent to the quota policy:
+\paragraph{Calibration.} The preference and technology parameters $\eta, \gamma, \rho, r, \alpha, p_b$ and the baseline labor-disutility weights $\beta_0, \beta_1$ are set to the values used in lecture 5 and Assignment 1. The wage scale $w$ is normalised, the tax rate $\tau_t$ and replacement rate $\phi$ are read from Danish legislation, and the total leave entitlement $\bar{L}$ from \emph{Barselstatistik}.
+
+\paragraph{Disciplining the asymmetry.} The two depreciation rates $\delta_1, \delta_2$ are the parameters that generate the child penalty in the model. We discipline them with two targeted moments from \citet{kleven2019children}: $\delta_2$ is chosen so the model reproduces the roughly 20-percentage-point drop in mothers' relative wages after first birth, and $\delta_1$ is chosen so fathers experience essentially no post-birth wage penalty. This is a small two-moment calibration in the same spirit as how Assignment 2 fixed $\lambda^{\text{joint}}$ and $\lambda^{\text{indiv}}$ before running the reform.
+
+\paragraph{Counterfactuals.} With $\theta$ pinned down, the policy experiment is a one-line change to the model class: solve and simulate for $\bar{q} \in \{0,\, 0.10,\, 0.25,\, 0.50\}$ exactly as Assignment 2 did when comparing joint and individual taxation. We report (i) the life-cycle gender wage gap $G_t = (w_{1,t}-w_{2,t})/w_{1,t}$, (ii) female labor supply, and (iii) the consumption-equivalent welfare gain $\xi(\bar{q})$, defined as the proportional increase in lifetime consumption under $\bar{q}=0$ that would leave the household indifferent to the quota policy:
 \begin{equation}
     V_0\!\left(n_0, a_0, k_{1,0}, k_{2,0};\, \bar{q}\right) \;=\; V_0\!\left(n_0, a_0, k_{1,0}, k_{2,0};\, \bar{q}=0,\, c_t \cdot (1+\xi)\right).
 \end{equation}
@@ -69,12 +73,11 @@ Tracing $\xi(\bar{q})$ and $G_t(\bar{q})$ jointly maps out the policy frontier b
 
 \section*{Data}
 
-To estimate the structural parameters and validate the counterfactuals, we use:
+Because the model is calibrated rather than estimated, the data requirement is light:
 \begin{itemize}
-    \item \textbf{Danish administrative registers (IDA):} matched employer-employee data on wages and hours by gender and parental status, used to identify $\alpha$, $\delta_1$, $\delta_2$ and to match the child penalty in \citet{kleven2019children}.
-    \item \textbf{Barselstatistik (Statistics Denmark):} parental leave spell lengths by parent, used to calibrate $\bar{L}$ and the baseline distribution of $\lambda_t$.
-    \item \textbf{Danish Labor Force Survey (AKU):} hours worked and employment rates by parental status, used to pin down the labor disutility parameters $\beta_0$, $\beta_1$, $\gamma$.
-    \item \textbf{Danish social-insurance rules:} the statutory replacement rate $\phi \approx 0.9$ (\emph{barselsdagpenge}) is taken directly from legislation and requires no estimation.
+    \item \textbf{Child-penalty estimates from \citet{kleven2019children}}: the published event-study coefficients on mothers' and fathers' wages provide the two calibration targets for $\delta_1$ and $\delta_2$.
+    \item \textbf{Danish social-insurance rules:} the statutory replacement rate $\phi \approx 0.9$ (\emph{barselsdagpenge}) and the total leave entitlement $\bar{L}$ are taken directly from legislation.
+    \item \textbf{Barselstatistik (Statistics Denmark):} the empirical baseline father-share of leave $\lambda_0 \approx 0.2$ pins down the no-quota baseline.
 \end{itemize}
 
-\noindent For external validation, the introduction of the 2022 Danish earmarked paternity quota provides a quasi-experimental setting against which the model's predicted change in $\lambda_t$ and $G_t$ can be benchmarked, similar in spirit to \citet{patnaik2019reserving} and \citet{carneiro2015flying}.
+\noindent A more ambitious version of this project would estimate the full parameter vector $\theta = (\eta, \gamma, \beta_0, \beta_1, \alpha, \delta_1, \delta_2, p_b, \rho)$ jointly by simulated method of moments on Danish administrative registers (IDA), targeting the entire pre- and post-birth event-study profile of hours and wages by gender. That extension is the natural next step beyond this course modification, and the structural framework set up here is the starting point for such an estimation.
