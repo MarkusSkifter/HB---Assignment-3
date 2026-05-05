@@ -1,37 +1,37 @@
 \begin{table}[h]
 \centering
 \small
-\begin{tabular}{@{}ll@{}}
+\begin{tabular}{@{}llc@{}}
 \toprule
-\textbf{Symbol} & \textbf{Represents} \\
+\textbf{Symbol} & \textbf{Represents} & \textbf{Value} \\
 \midrule
-$T$            & Length of the life cycle (number of periods the household lives) \\
-$\rho$         & Time discount factor: how much future utility is worth today \\
-$r$            & Interest rate on savings $a_t$ \\
-$\eta$         & Curvature of utility from consumption (risk aversion / EIS) \\
-$\gamma$       & Curvature of disutility from working hours \\
-$\beta_0$      & Baseline weight on labor disutility (no child present) \\
-$\beta_1$      & Extra labor disutility when a child is present in the household \\
-$w$            & Common pre-tax wage level (efficiency-units price of labor) \\
-$\tau_t$       & Proportional labor income tax rate \\
-$\alpha$       & Wage return to one unit of human capital \\
-$\delta_1$     & Father's human capital depreciation rate while on leave \\
-$\delta_2$     & Mother's human capital depreciation rate while on leave \\
-$p_b$          & Probability of a birth in a given period when childless \\
-$\bar{L}$      & Total parental leave time available to the household per birth \\
-$\phi$         & Replacement rate of wages while on parental leave \\
-$\bar{q}$      & Policy instrument: minimum share of leave the father must take \\
+$T$            & Length of the life cycle (number of periods the household lives) & $10$ \\
+$\rho$         & Time discount factor: how much future utility is worth today      & $0.98$ \\
+$r$            & Interest rate on savings $a_t$                                    & $0.02$ \\
+$\eta$         & Curvature of utility from consumption (risk aversion / EIS)       & $-1.5$ \\
+$\gamma$       & Curvature of disutility from working hours                        & $2.5$ \\
+$\beta_0$      & Baseline weight on labor disutility (no child present)            & $0.05$ \\
+$\beta_1$      & Extra labor disutility when a child is present in the household   & $0.0563$ \\
+$w$            & Common pre-tax wage level (efficiency-units price of labor)       & $1.0$ (normalised) \\
+$\tau_t$       & Proportional labor income tax rate                                & $0.10$ \\
+$\alpha$       & Wage return to one unit of human capital                          & $0.10$ \\
+$\delta_1$     & Father's human capital depreciation rate while on leave           & calibrated to data \\
+$\delta_2$     & Mother's human capital depreciation rate while on leave           & calibrated to data \\
+$p_b$          & Probability of a birth in a given period when childless           & $0.10$ \\
+$\bar{L}$      & Total parental leave time available to the household per birth    & $1.0$ \\
+$\phi$         & Replacement rate of wages while on parental leave                 & $0.9$ (legislation) \\
+$\bar{q}$      & Policy instrument: minimum share of leave the father must take    & $\{0,\,0.10,\,0.25,\,0.50\}$ \\
 \midrule
-$c_t$          & Household consumption in period $t$ \\
-$h_{i,t}$      & Hours worked by member $i$ in period $t$ \\
-$l_{i,t}$      & Share of period $t$ that member $i$ spends on parental leave \\
-$\lambda_t$    & Father's share of total leave at the period of birth \\
-$k_{i,t}$      & Human capital stock of member $i$ at the start of period $t$ \\
-$w_{i,t}$      & Pre-tax wage of member $i$ in period $t$ \\
-$a_t$          & Household assets at the start of period $t$ \\
-$n_t$          & Indicator for the presence of a child ($n_t \in \{0,1\}$) \\
+$c_t$          & Household consumption in period $t$                                  & endogenous \\
+$h_{i,t}$      & Hours worked by member $i$ in period $t$                             & endogenous \\
+$l_{i,t}$      & Share of period $t$ that member $i$ spends on parental leave         & endogenous \\
+$\lambda_t$    & Father's share of total leave at the period of birth                 & endogenous \\
+$k_{i,t}$      & Human capital stock of member $i$ at the start of period $t$         & state \\
+$w_{i,t}$      & Pre-tax wage of member $i$ in period $t$                             & function of $k_{i,t}$ \\
+$a_t$          & Household assets at the start of period $t$                          & state \\
+$n_t$          & Indicator for the presence of a child ($n_t \in \{0,1\}$)            & state \\
 \bottomrule
 \end{tabular}
-\caption{Model parameters (top) and choice/state variables (bottom) and what they represent.}
+\caption{Model parameters with calibrated values (top) and choice/state variables (bottom). Preference and technology parameters follow the lecture-5 / Assignment-1 defaults; $\phi$ is read from Danish legislation; $\delta_1, \delta_2$ are pinned by matching the child-penalty moments of \citet{kleven2019children}; $\bar{q}$ is the policy lever varied across counterfactuals.}
 \label{tab:params}
 \end{table}
