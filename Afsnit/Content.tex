@@ -4,7 +4,7 @@ How do mandatory paternity leave quotas affect the life-cycle gender wage gap an
 
 \section*{Motivation}
 
-Using Danish register data, \citet{kleven2019children} document a sharp ``child penalty'': mothers' earnings fall by roughly 20 percentage points relative to childless women after first birth, while fathers are unaffected. A central driver is that mothers take approximately 80 percent of total parental leave, interrupting their human capital accumulation. \citet{kleven2019childpenalties} show that this pattern is pervasive across countries, and \citet{patnaik2019reserving} finds that earmarked paternity quotas substantially shift leave allocation toward fathers. Whether such quotas reduce the gender wage gap, and whether the long-run gain in female earnings outweighs the short-run household income loss, is a quantitative question that requires a structural life-cycle model.
+Using Danish register data, \citet{kleven2019children} document a sharp ``child penalty'': mothers' earnings fall by roughly 20 percentage points relative to childless women after first birth, while fathers are unaffected. A central driver is that mothers take approximately 80 percent of total parental leave, interrupting their human capital accumulation. \citet{kleven2019childpenalties} show that this pattern is pervasive across countries, and \citet{patnaik2019reserving} finds that earmarked paternity quotas substantially shift leave allocation toward fathers. Because such quotas are recent --- Denmark's 2022 use-or-lose reform is the leading example --- and their long-run career effects play out over decades, observational data cannot yet identify the causal impact: answering whether the female-earnings gain outweighs the short-run household income loss requires a structural life-cycle model.
 
 \section*{Model}
 
@@ -20,19 +20,19 @@ with period utility
 \begin{equation}
     U(c_t, h_{1,t}, h_{2,t}, n_t) = \frac{c_t^{1+\eta}}{1+\eta} - \beta(n_t)\!\left(\frac{h_{1,t}^{1+\gamma}}{1+\gamma} + \frac{h_{2,t}^{1+\gamma}}{1+\gamma}\right),
 \end{equation}
-where $\beta(n_t) = \beta_0 + \beta_1\, n_t$ and $\beta_1 > 0$ captures the additional disutility of market work in the presence of a child. The model nests the childless case at $\beta_1 = 0$.
+where $\beta(n_t) = \beta_0 + \beta_1\, n_t$ and $\beta_1 > 0$ captures the additional disutility of market work in the presence of a child.
 
 \subsection*{Wages and Human Capital}
 
-Following the simple-model setup of lecture 5, wages are pre-tax and linear in own human capital,
+Following the simple-model setup of lecture 5, wages are pre-tax and linear in own human capital, with a gender-specific scale that captures the empirical pre-birth wage gap,
 \begin{equation}
-    w_{i,t} = w\,(1 + \alpha\, k_{i,t}),
+    w_{i,t} = w_i\,(1 + \alpha\, k_{i,t}),
 \end{equation}
-and human capital evolves with hours worked and depreciates only with parental leave,
+and human capital evolves with hours worked, depreciating only with parental leave,
 \begin{equation}
     k_{i,t+1} = k_{i,t}\,(1 - \delta_i\, l_{i,t}) + h_{i,t},
 \end{equation}
-where $l_{i,t} \in [0,1]$ is the share of period $t$ that member $i$ spends on leave and $\delta_i \geq 0$ is the depreciation rate. The key asymmetry is $\delta_2 \geq \delta_1$: leave is more costly for the mother's career, consistent with the child-penalty evidence in \citet{kleven2019children}.
+where $l_{i,t} \in [0,1]$ is the share of period $t$ that member $i$ spends on leave. The key asymmetry is $\delta_2 \geq \delta_1$: leave is more costly for the mother's career, reflecting that mothers' leave typically coincides with the most career-sensitive infant-care phase while fathers' shorter blocks fall in lower-intensity periods, consistent with the child-penalty evidence in \citet{kleven2019children}.
 
 \subsection*{Fertility, Leave, and Policy}
 
@@ -51,7 +51,7 @@ Each agent's time is split between work and leave, $h_{i,t} + l_{i,t} \leq 1$ wi
 \end{equation}
 where $\bar{q} \in [0, 0.5]$ is the policy instrument. With taxes applied to labor income and replacement received during leave, the household budget constraint is
 \begin{equation}
-    a_{t+1} = (1+r)\!\left(a_t + \sum_{i=1}^{2}\!\bigl[(1-\tau_t)\,w_{i,t}\,h_{i,t} + \phi\, w\, l_{i,t}\bigr] - c_t\right).
+    a_{t+1} = (1+r)\!\left(a_t + \sum_{i=1}^{2}\!\bigl[(1-\tau_t)\,w_{i,t}\,h_{i,t} + \phi\, w_i\, l_{i,t}\bigr] - c_t\right).
 \end{equation}
 
 \subsection*{Mechanism}
