@@ -40,11 +40,12 @@ A child arrives stochastically with probability
 \begin{equation}
     p(n_t) = \begin{cases} p_b & \text{if } n_t = 0,\\ 0 & \text{if } n_t = 1,\end{cases}
 \end{equation}
-so $n_{t+1} = n_t + 1$ with probability $p(n_t)$ and $n_{t+1} = n_t$ otherwise. Upon birth, total leave $\bar{L}$ is split between the partners: the father takes share $\lambda_t$ and the mother takes $1-\lambda_t$, with each receiving a wage replacement at rate $\phi$. Each agent's time is split between work and leave,
+so $n_{t+1} = n_t + 1$ with probability $p(n_t)$ and $n_{t+1} = n_t$ otherwise. Upon birth, total leave $\bar{L}$ is split between the partners: the father takes share $\lambda_t$ and the mother takes $1-\lambda_t$, with each receiving a wage replacement at rate $\phi$. Leave is taken only in the period of birth, so the leave shares entering eq.~(4) are
 \begin{equation}
-    h_{i,t} + l_{i,t} \;\leq\; 1, \qquad l_{i,t} \geq 0,\; h_{i,t} \geq 0,
+    l_{1,t} = \begin{cases}\lambda_t \bar{L} & \text{if birth in } t\\ 0 & \text{otherwise}\end{cases},\qquad
+    l_{2,t} = \begin{cases}(1-\lambda_t) \bar{L} & \text{if birth in } t\\ 0 & \text{otherwise}\end{cases}.
 \end{equation}
-and the mandatory paternity quota imposes
+Each agent's time is split between work and leave, $h_{i,t} + l_{i,t} \leq 1$ with $h_{i,t}, l_{i,t} \geq 0$, and the mandatory paternity quota imposes
 \begin{equation}
     \lambda_t \geq \bar{q}\quad\text{if a birth occurs in period }t,
 \end{equation}
@@ -55,7 +56,7 @@ where $\bar{q} \in [0, 0.5]$ is the policy instrument. With taxes applied to lab
 
 \subsection*{Mechanism}
 
-Two forces interact. First, a higher $\bar{q}$ shifts leave from mother to father, dampening the depreciation $\delta_2 (1-\lambda_t)\bar{L}$ on her human capital and raising her future wage through (3)--(4). Second, because $\delta_1 < \delta_2$, reallocating leave is costly in terms of \emph{aggregate} human capital and household income. The optimal $\bar{q}$ balances these gains and losses against the policy-maker's distributional objective. The model is solved by backward induction.
+Two forces interact. A higher $\bar{q}$ shifts leave from mother to father, lowering the mother's depreciation $\delta_2\, l_{2,t}$ and raising her future wage through (3)--(4); but because $\delta_1 < \delta_2$, reallocating leave is costly in terms of \emph{aggregate} human capital and household income. The optimal $\bar{q}$ balances these gains and losses, and the model is solved by backward induction.
 
 \section*{Identification and Counterfactuals}
 
@@ -65,11 +66,11 @@ The implementation is an extension of the lecture-5 simple model: a second earne
 
 \paragraph{Disciplining the asymmetry.} The two depreciation rates $\delta_1, \delta_2$ are the parameters that generate the child penalty in the model. We discipline them with two targeted moments from \citet{kleven2019children}: $\delta_2$ is chosen so the model reproduces the roughly 20-percentage-point drop in mothers' relative wages after first birth, and $\delta_1$ is chosen so fathers experience essentially no post-birth wage penalty.
 
-\paragraph{Counterfactuals.} With $\theta$ pinned down, the policy experiment is a one-line change to the model class: solve and simulate for $\bar{q} \in \{0,\, 0.10,\, 0.25,\, 0.50\}$ exactly as Assignment 2 did when comparing joint and individual taxation. We report (i) the life-cycle gender wage gap $G_t = (w_{1,t}-w_{2,t})/w_{1,t}$, (ii) female labor supply, and (iii) the consumption-equivalent welfare gain $\xi(\bar{q})$, defined as the proportional increase in lifetime consumption under $\bar{q}=0$ that would leave the household indifferent to the quota policy:
+\paragraph{Counterfactuals.} With the calibrated parameters $\theta = (\delta_1, \delta_2)$ pinned down, the policy experiment is a one-line change to the model class: solve and simulate for $\bar{q} \in \{0,\, 0.10,\, 0.25,\, 0.50\}$ exactly as Assignment 2 did when comparing joint and individual taxation. We report (i) the life-cycle gender wage gap $G_t = (w_{1,t}-w_{2,t})/w_{1,t}$, (ii) female labor supply, and (iii) the consumption-equivalent welfare gain $\xi(\bar{q})$, defined as the proportional increase in lifetime consumption under the baseline policy $\bar{q}=0$ that would leave the household indifferent to the quota policy:
 \begin{equation}
-    V_0\!\left(n_0, a_0, k_{1,0}, k_{2,0};\, \bar{q}\right) \;=\; V_0\!\left(n_0, a_0, k_{1,0}, k_{2,0};\, \bar{q}=0,\, c_t \cdot (1+\xi)\right).
+    V_0(n_0, a_0, k_{1,0}, k_{2,0};\, \bar{q}) \;=\; \tilde{V}_0(n_0, a_0, k_{1,0}, k_{2,0};\, \bar{q}=0),
 \end{equation}
-Tracing $\xi(\bar{q})$ and $G_t(\bar{q})$ jointly maps out the policy frontier between long-run wage convergence and short-run household income loss.
+where $\tilde{V}_0$ denotes the value under the baseline policy with consumption scaled by $(1+\xi)$ in every period. Tracing $\xi(\bar{q})$ and $G_t(\bar{q})$ jointly maps out the policy frontier between long-run wage convergence and short-run household income loss.
 
 \section*{Data}
 
